@@ -67,7 +67,29 @@ public class EdgeTest {
         Vertex nullOpposite = e.getNeighbour(v3);
         assertNull(nullOpposite);
     }
+    @Test
+    public void Hashmap_test(){
+        Vertex v1 = new Vertex("London");
+        Vertex v2 = new Vertex("Spain");
+        Edge e1 = new Edge(v1,v2,23);
+        assertTrue(e1.hashCode() == 426319473);
 
+    }
+    @Test(expected = LoopingEdgeException.class)
+    public void it_can_throw_a_loopingEdgeException(){
+        Vertex v1 = new Vertex("London");
+        Edge e1 = new Edge(v1,v1);
+    }
+    @Test
+    public void it_can_check_that_2_edges_are_not_Equal(){
+        Vertex v1 = new Vertex("London");
+        Vertex v2 = new Vertex("Manchester");
+        Vertex v3 = new Vertex("Liverpool");
+        Vertex v4 = new Vertex("Arms");
+        Edge e1 = new Edge(v1,v2,4);
+        Edge e2 = new Edge(v4,v3,10);
+        assertFalse(e1.equals(e2));
+    }
     @Test
     public void it_will_correctly_compare_the_weights_of_edges() {
         Vertex v1 = new Vertex("London");

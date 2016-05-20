@@ -45,8 +45,8 @@ public class Vertex {
         return this.Neighbourhood.contains(edge);
     }
 
-    public void getNeighbourhood(Edge e, Vertex a) {
-        e.getNeighbour(a);
+    public ArrayList getNeighbourhood() {
+        return this.Neighbourhood;
     }
 
     public Edge getNeighbour(int a) {
@@ -62,7 +62,7 @@ public class Vertex {
         if (Neighbourhood.contains(e)) {
             Neighbourhood.remove(Neighbourhood.indexOf(e));
         } else {
-            throw new EdgeNeighbourException("Neighbour is not present");
+            throw new EdgeNeighbourMissingException("Neighbour is not present");
         }
 
     }

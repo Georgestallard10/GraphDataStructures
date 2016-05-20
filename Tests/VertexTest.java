@@ -20,6 +20,15 @@ public class VertexTest {
         v1.removeNeighbour(e1);
     }
     @Test
+    public void It_can_get_neighbour_from_a_index(){
+        Vertex v1 = new Vertex("Newquay");
+        Vertex v2 = new Vertex("Truro");
+        Edge e1 =new Edge(v1,v2,2);
+        v1.addNeighbour(e1);
+        assertTrue(v1.getNeighbour(0)== e1);
+
+    }
+    @Test
     public void It_can_count_neighbours() {
         Vertex v1 = new Vertex("London");
         Vertex v2 = new Vertex("Exeter");

@@ -19,37 +19,25 @@ public class Graph {
     public Graph(Edge e) {
         this.Edges = new HashMap<>();
         this.Vertices = new HashMap<>();
-        Edges.put(e.hashCode(e), e);
+        Edges.put(e.hashCode(), e);
+        Vertices.put(e.getVertex1().hashCode(), e.getVertex1());
+        Vertices.put(e.getVertex2().hashCode(), e.getVertex2());
     }
 
 
-    public void removeVertex(String k) {
-        this.Vertices.remove(k);
+    public void removeVertex(Vertex v) {
+        this.Vertices.remove(v.hashCode());
     }
 
     public void addVertex(Vertex v) {
         if (this.Vertices.containsValue(v)) {
-            throw new EdgeDuplicateException("Edge is duplicated");
+            throw new VertexDuplicateException("Vertex is duplicated");
 
 
         } else {
             int s = v.hashCode();
             this.Vertices.put(s, v);
         }
-    }
-
-    public void addVertex(int s, Vertex v) {
-        if (this.Vertices.containsKey(s)) {
-            throw new EdgeDuplicateException("Edge is duplicated");
-
-
-        } else {
-            this.Vertices.put(s, v);
-        }
-    }
-
-    public HashMap getEdges(String c) {
-        return this.Edges;
     }
 
     public HashMap getEdges() {
@@ -60,30 +48,46 @@ public class Graph {
         return this.Vertices;
     }
 
-    public void addEdge(int key, Edge e) {
-        if (this.Edges.containsValue(e)) {
+    public void addEdge(Edge e) {
+        if (this.Edges.containsKey(e.hashCode())) {
             throw new EdgeDuplicateException("Edge is duplicated");
 
         } else {
-            this.Edges.put(key, e);
+            this.Edges.put(e.hashCode(), e);
         }
 
     }
 
     public void addEdge(Vertex Vertex1, Vertex Vertex2, int i) {
+        Edge edge = new Edge(Vertex1, Vertex2, i);
+        if (this.Edges.containsKey(edge.hashCode())) {
+            throw new EdgeDuplicateException("Edge is duplicated");
+
+        } else {
+            Edges.put(edge.hashCode(), edge);
+        }
 
     }
 
     public void addEdge(Vertex vertex1, Vertex vertex2) {
+        Edge edge = new Edge(vertex1, vertex2);
+        if (this.Edges.containsKey(edge.hashCode())) {
+            throw new EdgeDuplicateException("Edge is duplicated");
 
+        } else {
+            Edges.put(edge.hashCode(), edge);
+        }
     }
 
     public void removeEdge(Vertex Vertex1, Vertex Vertex2) {
+        Edge edge = new Edge(Vertex1, Vertex2);
+        this.Edges.remove(edge.hashCode());
+
 
     }
 
     public boolean containsVertex(Vertex V) {
-        if (this.Vertices.containsValue(V)) {
+        if (this.Vertices.containsKey(V.hashCode())) {
             return true;
         } else {
             return false;
@@ -91,7 +95,7 @@ public class Graph {
     }
 
     public boolean containsEdge(Edge e) {
-        if (this.Edges.containsValue(e)) {
+        if (this.Edges.containsKey(e.hashCode())) {
             return true;
         } else {
             return false;

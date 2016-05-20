@@ -26,12 +26,12 @@ public class Edge {
         } else if (result > 0) {
             this.Vertex2 = a;
             this.Vertex1 = b;
-            this.weight = weight;
+
 
         } else {
             this.Vertex2 = b;
             this.Vertex1 = a;
-            this.weight = weight;
+
 
         }
     }
@@ -112,11 +112,7 @@ public class Edge {
             return Vertex1;
         } else{ return null;}
     }
-    public int hashCode(Edge e){
-        String rehash = e.getVertex1().getLabel() +e.getVertex2().getLabel();
-        return rehash.hashCode();
 
-    }
     public int hashCode() {
         String unhash = this.getVertex1().getLabel() + this.getVertex2().getLabel();
         return unhash.hashCode();
